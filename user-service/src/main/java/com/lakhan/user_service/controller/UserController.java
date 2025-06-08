@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/user")
-@RequiredArgsConstructor
 public class UserController {
 
     @Autowired
@@ -42,9 +41,4 @@ public class UserController {
         }
         return ResponseEntity.ok(userDTO);
     }
-
-//    @GetMapping(value = "/username/{username}")
-//    public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
-//        return ResponseEntity.ok(userService.getUserDtoByUsername(username));
-//    }
 }

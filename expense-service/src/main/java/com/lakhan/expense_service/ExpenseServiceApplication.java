@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = "com.lakhan.expense_service.client")
 public class ExpenseServiceApplication {
 
 	public static void main(String[] args) {

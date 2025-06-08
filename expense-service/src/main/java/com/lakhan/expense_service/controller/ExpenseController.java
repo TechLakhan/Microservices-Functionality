@@ -38,6 +38,7 @@ public class ExpenseController {
             if (user == null) {
                 return ResponseEntity.badRequest().body("User not found");
             }
+            expenseRepository.save(expense);
             return ResponseEntity.ok("Expense saved for the user : " + user.getUsername());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("User-service is down");
