@@ -9,6 +9,6 @@ import com.techlakhan.common.dto.*;
 @FeignClient(name = "user-service")
 public interface UserClient {
 
-    @GetMapping(value = "/api/user/{username}")
+    @GetMapping(value = "/api/user/username/{username}")
     UserDTO getUserByUsername(@PathVariable String username);
 }

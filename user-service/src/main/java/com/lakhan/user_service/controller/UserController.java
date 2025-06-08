@@ -2,6 +2,8 @@ package com.lakhan.user_service.controller;
 
 import com.lakhan.user_service.model.User;
 import com.lakhan.user_service.repository.UserRepository;
+import com.lakhan.user_service.service.impl.UserServiceImpl;
+import com.techlakhan.common.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -18,6 +19,9 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserServiceImpl userService;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
@@ -29,8 +33,18 @@ public class UserController {
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "{username}")
-    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
-        userRepository.
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
+        UserDTO userDTO = userService.getUserDtoByUsername(username);
+        if (userDTO == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(null);
+        }
+        return ResponseEntity.ok(userDTO);
     }
+
+//    @GetMapping(value = "/username/{username}")
+//    public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String username) {
+//        return ResponseEntity.ok(userService.getUserDtoByUsername(username));
+//    }
 }

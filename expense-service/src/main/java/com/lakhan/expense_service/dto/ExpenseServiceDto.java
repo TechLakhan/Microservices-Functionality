@@ -1,33 +1,15 @@
-package com.lakhan.expense_service.model;
+package com.lakhan.expense_service.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.techlakhan.common.dto.UserDTO;
 
-@Entity
-public class Expense {
+public class ExpenseServiceDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String description;
     private double amount;
     private String username;
+    private UserDTO user;
 
-    // --- Constructors ---
-    public Expense() {
-    }
-
-    public Expense(Long id, String description, double amount, String username) {
-        this.id = id;
-        this.description = description;
-        this.amount = amount;
-        this.username = username;
-    }
-
-    // --- Getters and Setters ---
     public Long getId() {
         return id;
     }
@@ -58,5 +40,13 @@ public class Expense {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 }

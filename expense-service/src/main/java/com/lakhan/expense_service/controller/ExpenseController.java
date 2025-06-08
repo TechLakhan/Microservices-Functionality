@@ -1,8 +1,10 @@
 package com.lakhan.expense_service.controller;
 
 import com.lakhan.expense_service.client.UserClient;
+import com.lakhan.expense_service.dto.*;
 import com.lakhan.expense_service.model.Expense;
 import com.lakhan.expense_service.repository.ExpenseRepository;
+import com.lakhan.expense_service.service.ExpenseService;
 import com.techlakhan.common.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "expense")
+@RequestMapping(value = "/expense")
 public class ExpenseController {
 
     @Autowired
@@ -21,9 +23,12 @@ public class ExpenseController {
     @Autowired
     private UserClient userClient;
 
+    @Autowired
+    private ExpenseService expenseService;
+
     @GetMapping
-    public ResponseEntity<List<Expense>> getAllExpenses() {
-        return new ResponseEntity<>(expenseRepository.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<ExpenseServiceDto>> getAllExpenses() {
+        return ResponseEntity.ok(expenseService.getAllExpenses());
     }
 
     @PostMapping
